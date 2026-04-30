@@ -101,9 +101,3 @@ SELECT columns
 ORDER BY
 LIMIT
 
----
-
-## 🔹 One Line Summary
-
-👉 SQL likhte upar se hain
-👉 Execute niche se hota hai
