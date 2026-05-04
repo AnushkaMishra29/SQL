@@ -101,3 +101,7 @@ SELECT columns
 ORDER BY
 LIMIT
 
+New functions:
+julianday for dates--date nikalne ke liye floating point mein
+substr(date,startno, end no) year month wagera nikalne ke liye
+
