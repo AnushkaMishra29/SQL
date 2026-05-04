@@ -1,5 +1,6 @@
-Q1). Repeat purchase rate
+Q1). Repeat purchase rate (FIND REPEAT CUSTOMER RATE) 
   Calculate percentage of customers who placed more than one order. Return repeat_rate as percent.
+  https://fivesql.com/query-practice.html?id=Q33&difficulties=medium&statuses=unsolved&databases=amazon_ecommerce%2Chospital
 
 A1). SELECT ROUND(100.0 * SUM(CASE WHEN order_count > 1 THEN 1 ELSE 0 END) / COUNT(*),2) AS repeat_rate
     FROM (SELECT customer_id, COUNT(*) AS order_count FROM orders GROUP BY customer_id)
