@@ -1,0 +1,10 @@
+Q1). Repeat purchase rate
+  Calculate percentage of customers who placed more than one order. Return repeat_rate as percent.
+
+A1). SELECT ROUND(100.0 * SUM(CASE WHEN order_count > 1 THEN 1 ELSE 0 END) / COUNT(*),2) AS repeat_rate
+    FROM (SELECT customer_id, COUNT(*) AS order_count FROM orders GROUP BY customer_id)
+
+Strategy:
+first find out order count per person by grouping people by customer id 
+then find the repat customer rate by counting people who have more than 1 order count and find the percentage against entire count of people 
+
