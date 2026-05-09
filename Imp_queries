@@ -9,3 +9,8 @@ Strategy:
 first find out order count per person by grouping people by customer id 
 then find the repat customer rate by counting people who have more than 1 order count and find the percentage against entire count of people 
 
+
+Q2). Date time function:
+Show all days of the month (1-31) and how many admission_dates occurred on that day. Sort by day with most admissions to least.
+
+A2). SELECT CAST(STRFTIME('%d',admission_date) as integer) as dom, count(*) as ct group by dom order by ct desc, dom asc
