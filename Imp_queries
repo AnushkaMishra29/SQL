@@ -14,3 +14,8 @@ Q2). Date time function:
 Show all days of the month (1-31) and how many admission_dates occurred on that day. Sort by day with most admissions to least.
 
 A2). SELECT CAST(STRFTIME('%d',admission_date) as integer) as dom, count(*) as ct group by dom order by ct desc, dom asc
+      Also to find recent order date for example just do max(order_date) and for oldest order date min(order_date)
+
+Q3). To divide numbers into group. For example weights of prople into groups of 10-20, 20-30 etc etc
+     SELECT (FLOOR(weight/10)*10) AS weight_group, COUNT(*) AS total_patients FROM patients GROUP BY weight_group ORDER BY weight_group DESC;
+
