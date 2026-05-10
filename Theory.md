@@ -105,3 +105,14 @@ New functions:
 julianday for dates--date nikalne ke liye floating point mein
 substr(date,startno, end no) year month wagera nikalne ke liye
 
+# Do we have to use a group by if we use aggregate function in select?
+Yes — in SQL, whenever you use an aggregate function like:
+
+MAX()
+MIN()
+COUNT()
+SUM()
+AVG()
+
+along with normal columns in SELECT, you usually need GROUP BY.
+
