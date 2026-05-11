@@ -19,3 +19,8 @@ A2). SELECT CAST(STRFTIME('%d',admission_date) as integer) as dom, count(*) as c
 Q3). To divide numbers into group. For example weights of prople into groups of 10-20, 20-30 etc etc
      SELECT (FLOOR(weight/10)*10) AS weight_group, COUNT(*) AS total_patients FROM patients GROUP BY weight_group ORDER BY weight_group DESC;
 
+Q4). Give a temporary password to patients who made their first visit.
+     SELECT p.patient_id, CAST(p.patient_id AS TEXT) || CAST(LENGTH(p.last_name) AS TEXT) || CAST(strftime('%Y', p.birth_date) AS TEXT)
+     AS temp_password FROM patients p JOIN (SELECT patient_id, MIN(admission_date) AS first_adm FROM admissions GROUP BY patient_id) fa
+     ON p.patient_id = fa.patient_id;
+
