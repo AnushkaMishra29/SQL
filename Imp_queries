@@ -25,6 +25,6 @@ Q4). Give a temporary password to patients who made their first visit.
      ON p.patient_id = fa.patient_id;
 
 Q5). Find the employee first name, hire date , salary and the running total of salary.
-    select first_name, hire_date, salary, sum(salary) over( order by hire_date rows between unbounded 1 preceding and current row )as running_tot
+    select first_name, hire_date, salary, sum(salary) over( order by hire_date rows between  1 preceding and current row )as running_tot
     from employees
 
