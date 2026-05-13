@@ -24,3 +24,7 @@ Q4). Give a temporary password to patients who made their first visit.
      AS temp_password FROM patients p JOIN (SELECT patient_id, MIN(admission_date) AS first_adm FROM admissions GROUP BY patient_id) fa
      ON p.patient_id = fa.patient_id;
 
+Q5). Find the employee first name, hire date , salary and the running total of salary.
+    select first_name, hire_date, salary, sum(salary) over( order by hire_date range between unbounded 1 preceding and current row )as running_tot
+    from employees
+
