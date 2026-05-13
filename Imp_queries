@@ -28,3 +28,10 @@ Q5). Find the employee first name, hire date , salary and the running total of s
     select first_name, hire_date, salary, sum(salary) over( order by hire_date rows between  1 preceding and current row )as running_tot
     from employees
 
+Q6). Find running avaerage of salary for two cases:
+  i. with the current row and previous row
+  ii. current row, previous row and the previous row to it.
+
+    i. Select first_name, hire_date, salary, avg(salary) over(order by hire_date rows between 1 preceding and current rows) as run_avg1 from employees
+    ii. Select first_name, hire-date, salary, avg(salary) over(order by hire_date rows between 2 preceding and current rows) as run_av2 from employees
+
