@@ -45,3 +45,7 @@ Q7).Find the first and last value in the department column.
       select department, first_value(department) over(order by department as) as firstdept,
       last_value(department) over(order by department asc range between uprecedent and unbounded following) as last_dept from employees
 
+Q8). Finding the max of purchase count from one before and present and present one with one row after.
+      select customer,purchase_ct, max(purchase_ct) over(order by purchase ct asc)as max_present_andoneabove, max(purchase_ct) 
+      over(order by purchase_ct rows between current row and 1 following) as max_present_andonebelow from employees
+
