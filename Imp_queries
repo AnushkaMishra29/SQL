@@ -40,3 +40,8 @@ Q6). Find running avaerage of salary for two cases:
     i. Select first_name, hire_date, salary, avg(salary) over(order by hire_date rows between 1 preceding and current rows) as run_avg1 from employees
     ii. Select first_name, hire-date, salary, avg(salary) over(order by hire_date rows between 2 preceding and current rows) as run_av2 from employees
 
+
+Q7).Find the first and last value in the department column.
+      select department, first_value(department) over(order by department as) as firstdept,
+      last_value(department) over(order by department asc range between uprecedent and unbounded following) as last_dept from employees
+
