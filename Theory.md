@@ -124,4 +124,23 @@ DIFF WINDOW FUNC: AGGREGATE AND WINDOW FUNCTION
 AGGREGATE: SUN, COUNT, AVG ETC
 WINDOW FUNC- RANK() DENSE_RANK() NTILE(N) ROW_NUMBER() 
 
+# WINDOW FUNCTIONS THAT DO AND DO NOT TAKE PARAMETERS:
+Ranking functions mostly do not take parameters:
+ROW_NUMBER(), RANK(), DENSE_RANK()
+
+Behavior comparison functions take parameters:
+LAG(column, offset, default)
+LEAD(column, offset, default)
+
+Value-picking functions take parameters:
+FIRST_VALUE(column)
+LAST_VALUE(column)
+NTH_VALUE(column, n)
+
+Segmentation function takes parameter:
+NTILE(n)
+
+Aggregate window functions take column parameters:
+SUM(column), AVG(column), COUNT(column), MIN(column), MAX(column)
+
 
