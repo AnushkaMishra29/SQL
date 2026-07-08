@@ -41,14 +41,14 @@ SELECT
     LAST_VALUE(event_name) OVER (
         PARTITION BY user_id
         ORDER BY event_time ASC, event_id ASC
-#        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
     ) AS last_event_name,
 
     -- Latest event time in the full user journey
     LAST_VALUE(event_time) OVER (
         PARTITION BY user_id
         ORDER BY event_time ASC, event_id ASC
-#        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
     ) AS last_event_time
 
 FROM events
