@@ -60,3 +60,9 @@ ORDER BY
 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
 
 So SQL only looks from the first row up to the current row, not till the last row of the user.
+
+# FIRST_VALUE() usually works naturally with ORDER BY.
+
+# LAST_VALUE() needs full window frame: ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+
+# Otherwise LAST_VALUE() may return the current row, not the true last row.
