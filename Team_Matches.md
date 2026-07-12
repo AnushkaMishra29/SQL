@@ -1,5 +1,4 @@
-### Q1.  You are given a list of football teams participating in a round-robin tournament. Write a query to generate every unique 
-### match pairing such that each team plays every other team exactly once.
+### Q1.  You are given a list of football teams participating in a round-robin tournament. Write a query to generate every unique  match pairing such that each team plays every other team exactly once.
 
 SELECT
     a.team_id   AS team_1_id,
@@ -13,8 +12,7 @@ ORDER BY
     a.team_id,
     b.team_id;
 
-### Q2. Each team must now play every other team twice: once as the home team and once as the away team.
-### Generate both A vs B and B vs A, but do not generate self-matches.
+### Q2. Each team must now play every other team twice: once as the home team and once as the away team. Generate both A vs B and B vs A, but do not generate self-matches.
 
 SELECT
     a.team_id   AS team_1_id,
@@ -29,8 +27,7 @@ ORDER BY
     b.team_id;
 
 
-### Q3. Generate the complete match schedule where every team plays every other team twice: once in the first direction, nce in the reverse direction
-### Add a match_number column: First meeting between the two teams: 1, Reverse meeting: 2
+### Q3. Generate the complete match schedule where every team plays every other team twice: once in the first direction, nce in the reverse direction. Add a match_number column: First meeting between the two teams: 1, Reverse meeting: 2
 
 SELECT
     a.team_id AS team_1_id,
