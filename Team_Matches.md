@@ -7,7 +7,7 @@ SELECT
     b.team_name AS team_2_name
 FROM teams AS a
 JOIN teams AS b
-    ON a.team_id < b.team_id
+##### ON a.team_id < b.team_id
 ORDER BY
     a.team_id,
     b.team_id;
@@ -21,7 +21,7 @@ SELECT
     b.team_name AS team_2_name
 FROM teams AS a
 JOIN teams AS b
-    ON a.team_id <> b.team_id
+#####     ON a.team_id <> b.team_id
 ORDER BY
     a.team_id,
     b.team_id;
@@ -40,8 +40,8 @@ SELECT
     END AS match_number
 FROM teams a
 JOIN teams b
-    ON a.team_id <> b.team_id
+#####     ON a.team_id <> b.team_id
 ORDER BY
-    LEAST(a.team_id, b.team_id),
-    GREATEST(a.team_id, b.team_id),
-    match_number;
+ #####    LEAST(a.team_id, b.team_id),
+ #####    GREATEST(a.team_id, b.team_id),
+ #####    match_number;
