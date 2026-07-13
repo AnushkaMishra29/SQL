@@ -14,7 +14,7 @@
 #### Sort the output by stock_symbol.
 
 WITH all_stocks AS (
-###    SELECT DISTINCT
+   SELECT DISTINCT
         stock_symbol
     FROM stock_prices
 ),
@@ -24,7 +24,7 @@ all_possible_transactions AS (
         buy.stock_symbol AS stock_symbol,
         buy.price_date AS buy_date,
         sell.price_date AS sell_date,
-###        sell.closing_price - buy.closing_price AS profit
+        sell.closing_price - buy.closing_price AS profit
     FROM stock_prices AS buy
     JOIN stock_prices AS sell
         ON buy.stock_symbol = sell.stock_symbol
@@ -37,12 +37,12 @@ ranking AS (
         buy_date,
         sell_date,
         profit,
-###        ROW_NUMBER() OVER (
+       ROW_NUMBER() OVER (
             PARTITION BY stock_symbol
             ORDER BY
-###                profit DESC,
-###                buy_date ASC,
-###                sell_date ASC
+             profit DESC,
+              buy_date ASC,
+              sell_date ASC
         ) AS transaction_rank
     FROM all_possible_transactions
 )
@@ -51,24 +51,24 @@ SELECT
     st.stock_symbol,
 
     CASE
-###        WHEN r.profit > 0 THEN r.buy_date
+      WHEN r.profit > 0 THEN r.buy_date
         ELSE NULL
     END AS buy_date,
 
     CASE
-###        WHEN r.profit > 0 THEN r.sell_date
+       WHEN r.profit > 0 THEN r.sell_date
         ELSE NULL
     END AS sell_date,
 
     CASE
- ###       WHEN r.profit > 0 THEN r.profit
+      WHEN r.profit > 0 THEN r.profit
         ELSE 0.00
     END AS maximum_profit
 
 FROM all_stocks AS st
 LEFT JOIN ranking AS r
     ON st.stock_symbol = r.stock_symbol
-###   AND r.transaction_rank = 1
+   AND r.transaction_rank = 1
 
 ORDER BY
     st.stock_symbol;
