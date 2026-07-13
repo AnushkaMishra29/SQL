@@ -14,7 +14,7 @@ Assume that each stock has at most one price record per date.
  Sort the output by stock_symbol.
 
 
-
+## Answer
 
 WITH all_stocks AS (
    SELECT DISTINCT
