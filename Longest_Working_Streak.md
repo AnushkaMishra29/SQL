@@ -3,10 +3,13 @@
 <img width="992" height="325" alt="image" src="https://github.com/user-attachments/assets/fc07b7c0-ba99-4e6c-9fd6-b2a2fccf22b5" />
 
 
+## HINT: Consecutive dates and consecutive row numbers increase at the same rate, so subtracting them produces a constant value for every date in the same streak.
+<img width="911" height="437" alt="image" src="https://github.com/user-attachments/assets/1112ab9d-2e47-45aa-8519-f3a722c2e653" />
+
 ### Answer: 
 
 WITH distinct_logins AS (
-    -- Step 1: Treat multiple logins on the same date as one login day
+######    -- Step 1: Treat multiple logins on the same date as one login day
     SELECT DISTINCT
         user_id,
         login_date
@@ -14,7 +17,7 @@ WITH distinct_logins AS (
 ),
 
 numbered_logins AS (
-    -- Step 2: Number each user's login dates chronologically
+######     -- Step 2: Number each user's login dates chronologically
     SELECT
         user_id,
         login_date,
@@ -26,7 +29,7 @@ numbered_logins AS (
 ),
 
 grouped_logins AS (
-    -- Step 3: Create a common group identifier for consecutive dates
+######     -- Step 3: Create a common group identifier for consecutive dates
     SELECT
         user_id,
         login_date,
@@ -35,7 +38,7 @@ grouped_logins AS (
 ),
 
 streaks AS (
-    -- Step 4: Combine all dates belonging to the same streak
+######     -- Step 4: Combine all dates belonging to the same streak
     SELECT
         user_id,
         MIN(login_date) AS streak_start_date,
@@ -48,7 +51,7 @@ streaks AS (
 ),
 
 ranked_streaks AS (
-    -- Step 5: Rank each user's streaks from longest to shortest
+######     -- Step 5: Rank each user's streaks from longest to shortest
     SELECT
         user_id,
         streak_start_date,
