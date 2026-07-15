@@ -29,6 +29,9 @@ ORDER BY
 
 #### Q3. Generate the complete match schedule where every team plays every other team twice: once in the first direction, nce in the reverse direction. Add a match_number column: First meeting between the two teams: 1, Reverse meeting: 2
 
+<img width="1062" height="675" alt="image" src="https://github.com/user-attachments/assets/242f62ff-c198-42ec-b4a0-c447dc834207" />
+
+
 SELECT
     a.team_id AS team_1_id,
     a.team_name AS team_1_name,
