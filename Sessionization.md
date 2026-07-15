@@ -75,6 +75,6 @@ ORDER BY
     user_id,
     session_number;
 
-    <img width="942" height="637" alt="image" src="https://github.com/user-attachments/assets/7a72dabb-6803-4c93-9007-1813c7266ab6" />
+<img width="942" height="637" alt="image" src="https://github.com/user-attachments/assets/7a72dabb-6803-4c93-9007-1813c7266ab6" />
 
 
