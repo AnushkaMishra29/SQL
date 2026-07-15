@@ -48,3 +48,5 @@ ORDER BY
  #####    LEAST(a.team_id, b.team_id),
  #####    GREATEST(a.team_id, b.team_id),
  #####    match_number;
+
+<img width="932" height="760" alt="image" src="https://github.com/user-attachments/assets/ba7b2c1a-3087-464e-ac86-1c16bdfbcbcd" />
