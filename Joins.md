@@ -26,3 +26,58 @@ HAVING COUNT(DISTINCT p.product_id) = (
 )
 ORDER BY
     c.customer_id;
+
+
+
+### Q2. For each product category, find the top two products by total completed sales revenue during July 2026. If multiple products have the same revenue, assign them the same position. Return every product whose position is 1 or 2.
+<img width="1062" height="810" alt="image" src="https://github.com/user-attachments/assets/3c7e002d-ccb6-4436-8855-8bcd5c044d14" />
+
+### Answer:
+
+WITH product_revenue AS (
+    -- Calculate total July revenue separately for every product
+    SELECT
+        p.category,
+        p.product_id,
+        p.product_name,
+        SUM(oi.quantity * oi.unit_price) AS total_revenue
+    FROM products AS p
+    JOIN order_items AS oi
+        ON p.product_id = oi.product_id
+    JOIN orders AS o
+        ON oi.order_id = o.order_id
+    WHERE o.order_status = 'completed'
+      AND o.order_date >= DATE '2026-07-01'
+      AND o.order_date < DATE '2026-08-01'
+    GROUP BY
+        p.category,
+        p.product_id,
+        p.product_name
+),
+
+ranked_products AS (
+    -- Rank products by total revenue within each category
+    SELECT
+        category,
+        product_id,
+        product_name,
+        total_revenue,
+        DENSE_RANK() OVER (
+            PARTITION BY category
+            ORDER BY total_revenue DESC
+        ) AS revenue_position
+    FROM product_revenue
+)
+
+SELECT
+    category,
+    product_id,
+    product_name,
+    total_revenue,
+    revenue_position
+FROM ranked_products
+WHERE revenue_position <= 2
+ORDER BY
+    category,
+    revenue_position,
+    product_id;
