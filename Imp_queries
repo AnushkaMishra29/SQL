@@ -49,3 +49,79 @@ Q8). Finding the max of purchase count from one before and present and present o
       select customer,purchase_ct, max(purchase_ct) over(order by purchase ct asc)as max_present_andoneabove, max(purchase_ct) 
       over(order by purchase_ct rows between current row and 1 following) as max_present_andonebelow from employees
 
+Q9.) For each product and month, calculate: total completed sales revenue; revenue from the immediately previous calendar month; month-over-month revenue growth percentage.
+      WITH monthly_revenue AS (
+    -- Calculate one completed-revenue row per product per month
+    SELECT
+        product_id,
+        DATE_TRUNC('month', sale_date)::DATE AS sales_month,
+        SUM(revenue) AS monthly_revenue
+    FROM product_sales
+    WHERE sale_status = 'completed'
+    GROUP BY
+        product_id,
+        DATE_TRUNC('month', sale_date)::DATE
+),
+
+previous_available_values AS (
+    -- Find the previous available row for each product
+    SELECT
+        product_id,
+        sales_month,
+        monthly_revenue,
+
+        LAG(sales_month) OVER (
+            PARTITION BY product_id
+            ORDER BY sales_month
+        ) AS previous_available_month,
+
+        LAG(monthly_revenue) OVER (
+            PARTITION BY product_id
+            ORDER BY sales_month
+        ) AS previous_available_revenue
+    FROM monthly_revenue
+),
+
+validated_months AS (
+    -- Accept the previous revenue only if it came from
+    -- the immediately previous calendar month
+    SELECT
+        product_id,
+        sales_month,
+        monthly_revenue,
+
+        CASE
+            WHEN previous_available_month =
+                 (sales_month - INTERVAL '1 month')::DATE
+            THEN previous_available_revenue
+            ELSE NULL
+        END AS previous_month_revenue
+
+    FROM previous_available_values
+)
+
+SELECT
+    product_id,
+    sales_month,
+    monthly_revenue,
+    previous_month_revenue,
+
+    CASE
+        WHEN previous_month_revenue IS NULL
+          OR previous_month_revenue = 0
+        THEN NULL
+
+        ELSE ROUND(
+            (
+                (monthly_revenue - previous_month_revenue)
+                / NULLIF(previous_month_revenue, 0)
+            ) * 100,
+            2
+        )
+    END AS mom_growth_percentage
+
+FROM validated_months
+ORDER BY
+    product_id,
+    sales_month;
+
