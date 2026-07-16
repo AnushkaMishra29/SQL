@@ -42,15 +42,17 @@ Q6). Find running avaerage of salary for two cases:
 
 
 Q7).Find the first and last value in the department column.
-      select department, first_value(department) over(order by department as) as firstdept,
-      last_value(department) over(order by department asc range between uprecedent and unbounded following) as last_dept from employees
+      select department, first_value(department) over(order by department) as firstdept,
+      last_value(department) over(order by department asc ROWS between UNBOUNDED PRECEEDING and unbounded following) as last_dept from employees
 
 Q8). Finding the max of purchase count from one before and present and present one with one row after.
       select customer,purchase_ct, max(purchase_ct) over(order by purchase ct asc)as max_present_andoneabove, max(purchase_ct) 
       over(order by purchase_ct rows between current row and 1 following) as max_present_andonebelow from employees
 
 Q9.) For each product and month, calculate: total completed sales revenue; revenue from the immediately previous calendar month; month-over-month revenue growth percentage.
-      WITH monthly_revenue AS (
+      
+
+WITH monthly_revenue AS (
     -- Calculate one completed-revenue row per product per month
     SELECT
         product_id,
@@ -60,7 +62,7 @@ Q9.) For each product and month, calculate: total completed sales revenue; reven
     WHERE sale_status = 'completed'
     GROUP BY
         product_id,
-        DATE_TRUNC('month', sale_date)::DATE
+        DATE_TRUNC('month', sale_date)
 ),
 
 previous_available_values AS (
