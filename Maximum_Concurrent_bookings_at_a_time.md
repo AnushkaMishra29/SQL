@@ -5,7 +5,7 @@
 
 ### ANSWER:
 WITH booking_events AS (
-    -- Every booking start increases concurrency by 1
+######    -- Every booking start increases concurrency by 1
     SELECT
         room_id,
         start_time AS event_time,
@@ -15,7 +15,7 @@ WITH booking_events AS (
 
     UNION ALL
 
-    -- Every booking end decreases concurrency by 1
+######     -- Every booking end decreases concurrency by 1
     SELECT
         room_id,
         end_time AS event_time,
@@ -25,7 +25,7 @@ WITH booking_events AS (
 ),
 
 events_per_timestamp AS (
-    -- Combine all starts and ends occurring at the same timestamp
+######     -- Combine all starts and ends occurring at the same timestamp
     SELECT
         room_id,
         event_time,
@@ -37,7 +37,7 @@ events_per_timestamp AS (
 ),
 
 running_concurrency AS (
-    -- Calculate how many bookings are active after each timestamp
+######     -- Calculate how many bookings are active after each timestamp
     SELECT
         room_id,
         event_time,
@@ -50,7 +50,7 @@ running_concurrency AS (
 ),
 
 ranked_peaks AS (
-    -- Rank highest concurrency first and earliest timestamp first
+######     -- Rank highest concurrency first and earliest timestamp first
     SELECT
         room_id,
         event_time,
